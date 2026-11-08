@@ -70,3 +70,13 @@ class OrderStore:
         self._db.commit()
         LOG.info("order %s refunded", order_id)
         return self.get(order_id)
+
+    def refunded_total(self, customer_email: str) -> int:
+        """Return the refunded amount in cents for one customer (SPEC-001)."""
+        row = self._db.execute(
+            "SELECT COALESCE(SUM(amount_cents), 0) FROM orders "
+            "WHERE customer_email = ? AND refunded = 1",
+            (customer_email,),
+        ).fetchone()
+        LOG.info("refunded total requested for %s", mask_email(customer_email))
+        return int(row[0])

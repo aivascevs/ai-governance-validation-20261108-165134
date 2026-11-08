@@ -47,3 +47,25 @@ def test_logs_do_not_contain_email(caplog):
     caplog.set_level("INFO")
     OrderStore().create("ana@example.test", 700)
     assert "ana@example.test" not in caplog.text
+
+
+def test_refunded_total_sums_refunded_orders_only():
+    store = OrderStore()
+    a = store.create("ana@example.test", 1000)
+    store.create("ana@example.test", 300)
+    b = store.create("ana@example.test", 200)
+    store.refund(a.id)
+    store.refund(b.id)
+    assert store.refunded_total("ana@example.test") == 1200
+
+
+def test_refunded_total_without_refunds_is_zero():
+    store = OrderStore()
+    store.create("ben@example.test", 900)
+    assert store.refunded_total("ben@example.test") == 0
+
+
+def test_refunded_total_does_not_log_email(caplog):
+    caplog.set_level("INFO")
+    OrderStore().refunded_total("ana@example.test")
+    assert "ana@example.test" not in caplog.text
