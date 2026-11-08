@@ -1,0 +1,24 @@
+# C6 / A7 — Code owners. Replace the placeholder accounts before use.
+# Owners must approve pull requests that touch their paths when the ruleset
+# requires code-owner review (.github/ruleset.json). The last matching line wins.
+
+*                               @aivascevs
+
+# Governance rules, checks and their configuration
+/governance/                    @aivascevs
+/policy-config/                 @aivascevs
+/scripts/                       @aivascevs
+/.github/                       @aivascevs
+
+# Agent instructions and permission profiles (A7)
+/AGENTS.md                      @aivascevs
+/CLAUDE.md                      @aivascevs
+/.claude/                       @aivascevs
+/.vscode/                       @aivascevs
+/agent/                         @aivascevs
+
+# Dependency manifests need a licence and vulnerability decision (C5)
+**/requirements*.txt            @aivascevs
+**/pyproject.toml               @aivascevs
+**/package.json                 @aivascevs
+**/*.csproj                     @aivascevs
