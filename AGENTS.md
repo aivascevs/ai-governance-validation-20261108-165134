@@ -35,3 +35,5 @@ These instructions apply to every AI agent in this repository. They are **adviso
 - Say clearly what you did not check.
 
 The full procedure is in the `governed-change` skill (`.claude/skills/governed-change/SKILL.md`).
+
+<!-- S11: harmless one-line change for the code-owner check -->
